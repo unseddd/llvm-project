@@ -24,7 +24,7 @@ namespace {
 template <typename... ArgsTy>
 llvm::Value *import(llvm::Module &M, llvm::StringRef name, llvm::Type *ret,
                     ArgsTy... args) {
-#if LLVM_VERSION_MAJOR >= 9
+#if LLVM_VERSION_MAJOR >= 9 || LLVM_VERSION_MAJOR < 11
   return M.getOrInsertFunction(name, ret, args...).getCallee();
 #else
   return M.getOrInsertFunction(name, ret, args...);
